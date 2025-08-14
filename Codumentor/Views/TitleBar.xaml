@@ -1,0 +1,57 @@
+﻿<UserControl
+    x:Class="Codumentor.Views.TitleBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Codumentor.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:Codumentor.ViewModels"
+    Foreground="White"
+    mc:Ignorable="d">
+    <UserControl.DataContext>
+        <viewmodels:TitleBarViewModel />
+    </UserControl.DataContext>
+    <Border
+        Height="35"
+        VerticalAlignment="Top"
+        Background="Black"
+        MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+        <DockPanel LastChildFill="False">
+            <Image
+                Margin="7"
+                DockPanel.Dock="Left"
+                Source="/Resources/favicon.ico" />
+            <TextBlock
+                VerticalAlignment="Center"
+                FontSize="16"
+                Text="Codumentor" />
+            <Button
+                Width="40"
+                Command="{Binding CloseCommand}"
+                DockPanel.Dock="Right"
+                Style="{StaticResource TitleBarButton}">
+                <Button.Content>
+                    <materialDesign:PackIcon
+                        Width="25"
+                        Height="25"
+                        Foreground="LightGray"
+                        Kind="Close" />
+                </Button.Content>
+            </Button>
+            <Button
+                Width="40"
+                Command="{Binding MinimizeCommand}"
+                DockPanel.Dock="Right"
+                Style="{StaticResource TitleBarButton}">
+                <Button.Content>
+                    <materialDesign:PackIcon
+                        Width="25"
+                        Height="25"
+                        Foreground="LightGray"
+                        Kind="Minimize" />
+                </Button.Content>
+            </Button>
+        </DockPanel>
+    </Border>
+</UserControl>
