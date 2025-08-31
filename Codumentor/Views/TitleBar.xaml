@@ -30,7 +30,7 @@
                 Width="40"
                 Command="{Binding CloseCommand}"
                 DockPanel.Dock="Right"
-                Style="{StaticResource TitleBarButton}">
+                Style="{StaticResource TitleBarCloseButton}">
                 <Button.Content>
                     <materialDesign:PackIcon
                         Width="25"

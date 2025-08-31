@@ -39,12 +39,31 @@
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
+                <Button
+                    Width="30"
+                    Height="30"
+                    Margin="10,10,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Command="{Binding ToggleMenuCommand}"
+                    Style="{StaticResource TransparentButton}">
+                    <Button.Content>
+                        <materialDesign:PackIcon
+                            Width="30"
+                            Height="30"
+                            Background="#1f1f1f"
+                            Foreground="Gray"
+                            Kind="Settings" />
+                    </Button.Content>
+                </Button>
+
                 <TextBox
-                    Grid.Column="0"
+                    Grid.Column="1"
                     Margin="10"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
@@ -110,48 +129,79 @@
             Width="200"
             Margin="0,35,0,0"
             HorizontalAlignment="Left"
-            Background="#333"
+            Background="#222"
             RenderTransformOrigin="0,0">
             <Border.RenderTransform>
                 <TranslateTransform x:Name="MenuTransform" X="-200" />
             </Border.RenderTransform>
 
             <Grid>
-                <StackPanel>
-                    <Button
-                        Background="Transparent"
-                        BorderBrush="Transparent"
-                        Content="Пункт 1"
-                        Foreground="White" />
-                    <Button
-                        Background="Transparent"
-                        BorderBrush="Transparent"
-                        Content="Пункт 2"
-                        Foreground="White" />
-                    <Button
-                        Background="Transparent"
-                        BorderBrush="Transparent"
-                        Content="Пункт 3"
-                        Foreground="White" />
-                </StackPanel>
-
                 <Button
-                    Width="30"
-                    Height="60"
-                    Margin="0,0,-20,0"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     Command="{Binding ToggleMenuCommand}"
-                    Style="{StaticResource TransparentButton}">
+                    Style="{StaticResource TitleBarCloseButton}">
                     <Button.Content>
-                        <Path
-                            Width="24"
-                            Height="24"
-                            Data="M400,-280 V-680 L600,-480 L400,-280 Z"
-                            Fill="#e3e3e3"
-                            Stretch="Uniform" />
+                        <materialDesign:PackIcon
+                            Width="25"
+                            Height="25"
+                            Foreground="LightGray"
+                            Kind="Close" />
                     </Button.Content>
                 </Button>
+                <StackPanel>
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Background="Transparent"
+                        Text="Название файла" />
+                    <TextBox
+                        Margin="20,10"
+                        Padding="5,3"
+                        Background="#333"
+                        Text="{Binding FileName}" />
+
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Background="Transparent"
+                        Text="Расширение файла" />
+                    <ComboBox
+                        Margin="20,10"
+                        Padding="5,3"
+                        Background="#333"
+                        SelectedIndex="0">
+                        <ComboBoxItem Content="pdf" />
+                        <ComboBoxItem Content="docx" />
+                    </ComboBox>
+
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Background="Transparent"
+                        Text="Шрифт заголовков" />
+                    <ComboBox
+                        Margin="20,10"
+                        Padding="5,3"
+                        Background="#333"
+                        SelectedIndex="0">
+                        <ComboBoxItem Content="Скоро" />
+                    </ComboBox>
+
+                    <TextBlock
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        Background="Transparent"
+                        Text="Шрифт кода" />
+                    <ComboBox
+                        Margin="20,10"
+                        Padding="5,3"
+                        Background="#333"
+                        SelectedIndex="0">
+                        <ComboBoxItem Content="Скоро" />
+                    </ComboBox>
+
+                </StackPanel>
             </Grid>
 
             <!--  DataTrigger для открытия/закрытия  -->

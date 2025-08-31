@@ -14,7 +14,7 @@ namespace Codumentor.Services
 {
     public class CodeToWordExporter
     {
-        public void ExportCodeToWord(ObservableCollection<string> filePaths, string outputFilePath, bool isPDF = true)
+        public void ExportCodeToDocument(ObservableCollection<string> filePaths, string outputFilePath, bool isPDF = true)
         {
             var _wordApp = new Application();
             var doc = _wordApp.Documents.Add();
@@ -63,9 +63,9 @@ namespace Codumentor.Services
             }
         }
 
-        public Task ExportCodeToWordAsync(ObservableCollection<string> filePaths, string outputPath)
+        public Task ExportCodeToDocumentAsync(ObservableCollection<string> filePaths, string outputPath, bool isPDF = true)
         {
-            return Task.Run(() => ExportCodeToWord(filePaths, outputPath));
+            return Task.Run(() => ExportCodeToDocument(filePaths, outputPath));
         }
 
         private void InsertFileName(Document doc, string fileName)

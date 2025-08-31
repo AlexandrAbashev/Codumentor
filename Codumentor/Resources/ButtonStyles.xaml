@@ -22,9 +22,20 @@
     </Style>
 
     <Style
+        x:Key="TitleBarCloseButton"
+        BasedOn="{StaticResource TitleBarButton}"
+        TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#9aff0000" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
         x:Key="ListItemButton"
         BasedOn="{StaticResource TransparentButton}"
-        TargetType="Button" >
+        TargetType="Button">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#1f000000" />

@@ -22,6 +22,20 @@ namespace Codumentor.ViewModels
             set => SetProperty(ref _folderPath, value);
         }
 
+        private string _fileName;
+        public string FileName
+        {
+            get => _fileName;
+            set => SetProperty(ref _fileName, value);
+        }
+
+        private string _fileExtension;
+        public string FileExtension
+        {
+            get => _fileExtension;
+            set => SetProperty(ref _fileExtension, value);
+        }
+
         private bool _isMenuOpen;
         public bool IsMenuOpen
         {
@@ -48,6 +62,10 @@ namespace Codumentor.ViewModels
                 FilePaths.Add(@"C:\Test\file2.md");
                 FilePaths.Add(@"D:\Projects\example.txt");
             }
+
+            FileName = "exported_code";
+            FileExtension = "pdf";
+
             DropCommand = new DelegateCommand<DragEventArgs>(OnDrop);
             ExportToWordCommand = new AsyncDelegateCommand(ExportToWordAsync);
 
@@ -103,8 +121,16 @@ namespace Codumentor.ViewModels
             {
                 ShowMessage("Сохранение файла...");
 
-                string outputPath = $@"{FolderPath}\exported_code.docx";
-                await _exporter.ExportCodeToWordAsync(FilePaths, outputPath);
+                string outputPath = $@"{FolderPath}\{FileName}.{FileExtension}";
+                switch (FileExtension)
+                {
+                    case "pdf":
+                        await _exporter.ExportCodeToDocumentAsync(FilePaths, outputPath, true);
+                        break;
+                    case "docx":
+                        await _exporter.ExportCodeToDocumentAsync(FilePaths, outputPath, false);
+                        break;
+                }
 
                 ShowMessage("Файл сохранён!");
             }
