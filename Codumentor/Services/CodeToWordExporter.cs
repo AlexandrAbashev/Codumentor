@@ -104,7 +104,7 @@ namespace Codumentor.Services
             }
         }
 
-        private string HighLightCode(string code, ILanguage language)
+        private string HighLightCode(string code, ILanguage? language)
         {
             var colorizer = new CodeColorizer();
 
