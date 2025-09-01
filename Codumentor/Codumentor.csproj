@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\favicon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="ColorCode" Version="1.0.1" />
     <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
     <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
