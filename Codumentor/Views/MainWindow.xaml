@@ -51,15 +51,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Command="{Binding ToggleMenuCommand}"
-                    Style="{StaticResource TransparentButton}">
-                    <Button.Content>
-                        <materialDesign:PackIcon
-                            Width="30"
-                            Height="30"
-                            Background="#1f1f1f"
-                            Foreground="Gray"
-                            Kind="Settings" />
-                    </Button.Content>
+                    Style="{StaticResource SettingsButton}">
                 </Button>
 
                 <TextBox
@@ -72,7 +64,7 @@
                     Text="{Binding FolderPath, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Button
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Width="130"
                     Margin="10"
                     HorizontalAlignment="Right"
@@ -151,9 +143,8 @@
                 </Button>
                 <StackPanel>
                     <TextBlock
-                        Margin="5"
+                        Margin="0,30,0,10"
                         HorizontalAlignment="Center"
-                        Background="Transparent"
                         Text="Название файла" />
                     <TextBox
                         Margin="20,10"
@@ -164,7 +155,6 @@
                     <TextBlock
                         Margin="5"
                         HorizontalAlignment="Center"
-                        Background="Transparent"
                         Text="Расширение файла" />
                     <ComboBox
                         Margin="20,10"
@@ -178,25 +168,25 @@
                     <TextBlock
                         Margin="5"
                         HorizontalAlignment="Center"
-                        Background="Transparent"
                         Text="Шрифт заголовков" />
                     <ComboBox
                         Margin="20,10"
                         Padding="5,3"
+                        IsEditable="True"
                         Background="#333"
+                        ItemsSource="{Binding InstalledFonts}"
                         SelectedIndex="0">
-                        <ComboBoxItem Content="Скоро" />
                     </ComboBox>
 
                     <TextBlock
                         Margin="5"
                         HorizontalAlignment="Center"
-                        Background="Transparent"
                         Text="Шрифт кода" />
                     <ComboBox
                         Margin="20,10"
                         Padding="5,3"
                         Background="#333"
+                        IsEditable="True"
                         SelectedIndex="0">
                         <ComboBoxItem Content="Скоро" />
                     </ComboBox>

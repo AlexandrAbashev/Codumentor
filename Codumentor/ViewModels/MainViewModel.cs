@@ -43,6 +43,15 @@ namespace Codumentor.ViewModels
             set => SetProperty(ref _isMenuOpen, value);
         }
 
+        private string _selectedHeadersFont;
+        public string SelectedHeadersFont
+        {
+            get => _selectedHeadersFont;
+            set => SetProperty(ref _selectedHeadersFont, value);
+        }
+
+        public List<string> InstalledFonts { get; }
+
         public DelegateCommand<DragEventArgs> DropCommand { get; }
         public DelegateCommand<string> MoveUpCommand { get; }
         public DelegateCommand<string> MoveDownCommand { get; }
@@ -56,6 +65,8 @@ namespace Codumentor.ViewModels
 
         public MainViewModel()
         {
+            _exporter = new CodeToWordExporter();
+
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
                 FilePaths.Add(@"C:\Test\file1.cs");
@@ -65,6 +76,7 @@ namespace Codumentor.ViewModels
 
             FileName = "exported_code";
             FileExtension = "pdf";
+            InstalledFonts = _exporter.GetInstalledFonts();
 
             DropCommand = new DelegateCommand<DragEventArgs>(OnDrop);
             ExportToWordCommand = new AsyncDelegateCommand(ExportToWordAsync);
@@ -89,7 +101,6 @@ namespace Codumentor.ViewModels
                 IsMenuOpen = !IsMenuOpen;
             });
 
-            _exporter = new CodeToWordExporter();
         }
 
         private void OnFilesChanged(object sender, NotifyCollectionChangedEventArgs e)

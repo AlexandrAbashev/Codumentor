@@ -9,15 +9,16 @@ using Application = Microsoft.Office.Interop.Word.Application;
 using Range = Microsoft.Office.Interop.Word.Range;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Drawing.Text;
 
 namespace Codumentor.Services
 {
     public class CodeToWordExporter
     {
-        public void ExportCodeToDocument(ObservableCollection<string> filePaths, string outputFilePath, bool isPDF = true)
+        public void ExportCodeToDocument(ObservableCollection<string> filePaths, string outputFilePath, string headersFontName, bool isPDF = true)
         {
-            var _wordApp = new Application();
-            var doc = _wordApp.Documents.Add();
+            var wordApp = new Application();
+            var doc = wordApp.Documents.Add();
             try
             {
                 foreach (var filePath in filePaths)
@@ -27,7 +28,7 @@ namespace Codumentor.Services
                         string fileName = Path.GetFileName(filePath);
                         string code = File.ReadAllText(filePath);
 
-                        InsertFileName(doc, fileName);
+                        InsertFileName(doc, fileName, headersFontName);
 
                         string fileExtension = Path.GetExtension(filePath).ToLower();
 
@@ -59,16 +60,22 @@ namespace Codumentor.Services
             {
                 doc?.Close(false);
                 Marshal.ReleaseComObject(doc);
-                _wordApp.Quit();
+                wordApp.Quit();
             }
         }
 
-        public Task ExportCodeToDocumentAsync(ObservableCollection<string> filePaths, string outputPath, bool isPDF = true)
+        public Task ExportCodeToDocumentAsync(ObservableCollection<string> filePaths, string outputPath, bool isPDF = true, string headersFontName = "Times New Roman")
         {
-            return Task.Run(() => ExportCodeToDocument(filePaths, outputPath));
+            return Task.Run(() => ExportCodeToDocument(filePaths, outputPath, headersFontName, isPDF));
         }
 
-        private void InsertFileName(Document doc, string fileName)
+        public List<string> GetInstalledFonts()
+        {
+            InstalledFontCollection fonts = new InstalledFontCollection();
+            return fonts.Families.Select(f => f.Name).ToList();
+        }
+
+        private void InsertFileName(Document doc, string fileName, string fontName)
         {
             Range fileNameInsertRange = doc.Content;
             fileNameInsertRange.Collapse(WdCollapseDirection.wdCollapseEnd);
@@ -78,7 +85,7 @@ namespace Codumentor.Services
             Range fileNameRange = doc.Range(fileNameStart, fileNameInsertRange.End);
             fileNameRange.Font.Bold = 1;
             fileNameRange.Font.Size = 12;
-            fileNameRange.Font.Name = "Times New Roman";
+            fileNameRange.Font.Name = fontName;
             fileNameRange.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
         }
 
