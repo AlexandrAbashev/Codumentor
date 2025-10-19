@@ -69,7 +69,7 @@
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Путь к папке"
                     materialDesign:TextFieldAssist.HasClearButton="True"
-                    Text="{Binding FolderPath, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding FolderPath, UpdateSourceTrigger=PropertyChanged}" Cursor="" />
 
                 <Button
                     Grid.Column="1"
